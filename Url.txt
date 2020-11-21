@@ -1,0 +1,1 @@
+https://example.com/trigger/power_off_br_aircon?value1=restclientapp.home-server
