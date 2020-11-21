@@ -1,2 +1,2 @@
 # rest-client-app
-Make REST call via command line
+Make POST REST call via command line (with no content)
