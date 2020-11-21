@@ -1,33 +1,32 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
-using log4net;
+using Serilog;
+using Serilog.Events;
 
 namespace RestClientApp
 {
     class Program
     {
-        private static ILog Log;
-
         static int Main(string[] args)
         {
             Console.WriteLine("Starting...");
             try
             {
-                var root = Path.GetDirectoryName(new Uri(Assembly.GetEntryAssembly().CodeBase).LocalPath);
-                var logsDir = Path.Combine(root, "Logs");
-                Console.WriteLine($"Creating dir {logsDir}");
-                Directory.CreateDirectory(logsDir);
-                var repo = LogManager.CreateRepository(Assembly.GetEntryAssembly(), typeof(log4net.Repository.Hierarchy.Hierarchy));
-                log4net.Config.XmlConfigurator.Configure(repo, new FileInfo("log4net.config"));
-                Log = LogManager.GetLogger(typeof(Program));
+                var root = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
+                Log.Logger = new LoggerConfiguration()
+                    .MinimumLevel.Is(LogEventLevel.Debug)
+                    .WriteTo.Console()
+                    .WriteTo.File("Logs/RestClientApp-.log", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error configuring log4net - " + ex.Message);
+                Console.WriteLine("Error configuring logging - " + ex.Message);
                 return -1;
             }
             string urlFile = "Url.txt";
@@ -35,15 +34,33 @@ namespace RestClientApp
             {
                 urlFile = args[0];
             }
-            Task.Factory.StartNew(() => Run(urlFile)).Unwrap().Wait();
+            string contentFile = "Content.txt";
+            if (args.Length > 1)
+            {
+                contentFile = args[1];
+            }
+            Task.Factory.StartNew(() => Run(urlFile, contentFile)).Unwrap().Wait();
             return 0;
         }
 
-        private static async Task Run(string urlFile)
+        private static async Task Run(string urlFile, string contentFile)
         {
             Log.Debug("Application start");
             var client = new HttpClient();
-            var content = new StringContent(string.Empty);
+            string contentBody = string.Empty;
+            try
+            {
+                if (!string.IsNullOrEmpty(contentFile) && File.Exists(contentFile))
+                {
+                    contentBody = await File.ReadAllTextAsync(contentFile);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Debug($"Exception type is {ex.GetType().FullName} for contentFile {contentFile}");
+                Log.Warning($"Error {ex.Message} {ex.InnerException?.Message}");
+            }
+            var content = new StringContent(contentBody);
             try
             {
                 var url = File.ReadAllText(urlFile);
@@ -54,7 +71,7 @@ namespace RestClientApp
             catch (Exception ex)
             {
                 Log.Debug($"Exception type is {ex.GetType().FullName} for urlFile {urlFile}");
-                Log.Warn($"Error {ex.Message} {ex.InnerException?.Message}");
+                Log.Warning($"Error {ex.Message} {ex.InnerException?.Message}");
             }
             Log.Debug("Application end");
         }
