@@ -13,6 +13,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
+
+    - uses: dotnet/nbgv@master
+      with:
+        setAllVars: true
+      id: nbgv
+
+    - name: Versioning
+      run: echo ${{ steps.nbgv.outputs.SemVer2 }}
+      
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
