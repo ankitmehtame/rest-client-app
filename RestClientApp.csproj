@@ -1,15 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <AssemblyName>ankitmehtame.restclientapp</AssemblyName>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <PublishSingleFile>true</PublishSingleFile>
-    <PublishTrimmed>true</PublishTrimmed>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishSingleFile>false</PublishSingleFile>
+    <PublishTrimmed>false</PublishTrimmed>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+    <PackAsTool>true</PackAsTool>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Serilog" Version="*"/>
     <PackageReference Include="Serilog.Sinks.Console" Version="*"/>
     <PackageReference Include="Serilog.Sinks.File" Version="*"/>
+    <PackageReference Include="Nerdbank.GitVersioning" Version="*"/>
   </ItemGroup>
 </Project>
