@@ -10,7 +10,6 @@
     "publicReleaseRefSpec": [
         "^refs/heads/master$",
         "^refs/heads/main$",
-        "^refs/heads/build$",
         "^refs/tags/v\\d+\\.\\d+"
       ]
   }
