@@ -22,7 +22,7 @@ jobs:
       id: nbgv
 
     - name: Versioning
-      run: echo Used=${{ steps.nbgv.outputs.Version }} Actual=${{ steps.nbgv.outputs.SemVer2 }}
+      run: echo Version=${{ steps.nbgv.outputs.Version }} Used=${{ steps.nbgv.outputs.NuGetPackageVersion }} SemVer2=${{ steps.nbgv.outputs.SemVer2 }}
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
@@ -35,6 +35,6 @@ jobs:
     # - name: Test
     #   run: dotnet test --no-restore --verbosity normal
     - name: Pack
-      run: dotnet pack --no-build --configuration Release RestClientApp.csproj --output . -p:NuspecProperties="Version=${{ steps.nbgv.outputs.Version }}"
-    # - name: Push to Nuget
-    #   run: dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_KEY}} --skip-duplicate
+      run: dotnet pack --no-build --configuration Release RestClientApp.csproj --output . -p:NuspecProperties="Version=${{ steps.nbgv.outputs.NuGetPackageVersion }}"
+    - name: Push to Nuget
+      run: dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_KEY}} --skip-duplicate
