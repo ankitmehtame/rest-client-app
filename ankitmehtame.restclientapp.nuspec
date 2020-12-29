@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>ankitmehtame.restclientapp</id>
+    <version>1.0</version>
+    <authors>Ankit Mehta</authors>
+    <projectUrl>https://github.com/ankitmehtame/rest-client-app</projectUrl>
+    <tags>ankitmehtame rest client</tags>
+    <summary>Make POST REST call via command line</summary>
+    <description>Make POST REST call via command line (with no content) Can provide URL via file and content body via file, with 1st and 2nd arguments respectively</description>
+  </metadata>
+  <files>
+    <file src="bin/Release/netcoreapp*/*.*" target="tools" />
+  </files>
+</package>

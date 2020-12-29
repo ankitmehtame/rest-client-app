@@ -6,8 +6,8 @@
     <PublishSingleFile>false</PublishSingleFile>
     <PublishTrimmed>false</PublishTrimmed>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
-    <PackAsTool>true</PackAsTool>
-    <PackageOutputPath>./nupkg</PackageOutputPath>
+    <PackAsTool>false</PackAsTool>
+    <NuspecFile>ankitmehtame.restclientapp.nuspec</NuspecFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Serilog" Version="*"/>
