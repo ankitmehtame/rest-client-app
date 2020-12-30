@@ -15,6 +15,6 @@
   <files>
     <file src="bin\Release\**\*.*" target="lib" exclude="**/*.dev.json;**/*.ps1;**/*.txt" />
     <!-- <file src="bin/Release/**/*.*" target="tools" /> -->
-    <file src="bin/Release/netcoreapp*/tools/*.*" target="tools" />
+    <file src="bin\Release\netcoreapp*\tools\*.*" target="tools" />
   </files>
 </package>
