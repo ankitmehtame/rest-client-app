@@ -1,7 +1,8 @@
 param($installPath, $toolsPath, $package)
 
-# param($installPath, $toolsPath, $package, $project)
-$logFile = "D:\temp\testlog.txt"
+$logDir = Join-Path $env:TEMP "restclientapp"
+$logFile = Join-Path $logDir "testlog.txt"
+New-Item -ItemType Directory -Path $logDir -Force
 Add-Content -Path $logFile -Value "Installing restclientapp to $installPath"
 Add-Content -Path $logFile -Value "Tools path is $toolsPath"
 $currentDir = Join-Path $installPath "current"
