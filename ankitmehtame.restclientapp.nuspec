@@ -9,7 +9,12 @@
     <summary>Make POST REST call via command line</summary>
     <description>Make POST REST call via command line (with no content) Can provide URL via file and content body via file, with 1st and 2nd arguments respectively</description>
   </metadata>
+  <dependencies>
+    <group targetFramework="netcoreapp3.1" />
+  </dependencies>
   <files>
-    <file src="bin/Release/netcoreapp*/*.*" target="tools" />
+    <!-- <file src="bin/Release/**" target="lib" /> -->
+    <!-- <file src="bin/Release/**/*.*" target="tools" /> -->
+    <!-- <file src="bin/Release/netcoreapp*/tools/*.*" target="tools" /> -->
   </files>
 </package>

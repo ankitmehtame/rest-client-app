@@ -1,0 +1,1 @@
+You can install using install.ps1 file in case automatic installation fails.

@@ -7,12 +7,24 @@
     <PublishTrimmed>false</PublishTrimmed>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
     <PackAsTool>false</PackAsTool>
-    <NuspecFile>ankitmehtame.restclientapp.nuspec</NuspecFile>
+    <!-- <NuspecFile>ankitmehtame.restclientapp.nuspec</NuspecFile> -->
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Serilog" Version="*"/>
     <PackageReference Include="Serilog.Sinks.Console" Version="*"/>
     <PackageReference Include="Serilog.Sinks.File" Version="*"/>
     <PackageReference Include="Nerdbank.GitVersioning" Version="*"/>
+  </ItemGroup>
+  <!-- <ItemGroup>
+    <ToolsFiles Include="tools/**/*.*"/>
+  </ItemGroup>
+  <Target Name="CopyToolsContent" AfterTargets="AfterBuild">
+    <Copy SourceFiles="@(ToolsFiles)" DestinationFolder="$(OutDir)/tools" SkipUnchangedFiles="true" />
+  </Target> -->
+  <ItemGroup>
+    <Content Include="tools\**\*">
+      <Pack>true</Pack>
+      <PackagePath>tools\</PackagePath>
+    </Content>
   </ItemGroup>
 </Project>
