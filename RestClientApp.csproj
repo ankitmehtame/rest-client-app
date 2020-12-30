@@ -7,7 +7,7 @@
     <PublishTrimmed>false</PublishTrimmed>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
     <PackAsTool>false</PackAsTool>
-    <!-- <NuspecFile>ankitmehtame.restclientapp.nuspec</NuspecFile> -->
+    <NuspecFile>ankitmehtame.restclientapp.nuspec</NuspecFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Serilog" Version="*"/>
